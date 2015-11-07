@@ -57,5 +57,6 @@ public class PlayerController : MonoBehaviour {
 
 			enable = false;
 		}
-	}
+	}  
+
 }
