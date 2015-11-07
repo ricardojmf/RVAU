@@ -5,7 +5,6 @@ using Vuforia;
 public class PlayerController : MonoBehaviour {
 
     private float targetInitialPosition;
-    private float targetInitialRotation;
 	private bool enable;
 	private TrackableBehaviour mTrackableBehaviour;
 
@@ -25,28 +24,21 @@ public class PlayerController : MonoBehaviour {
 
 		if (mTrackableBehaviour.CurrentStatus.Equals (TrackableBehaviour.Status.TRACKED)) {
 			if (enable) {
-				float angleDirection;
-				float force;
-					
-				float targetRotation = (transform.eulerAngles.x + 360 - targetInitialRotation) % 360;
-					
-				if (targetRotation > 180)
-					angleDirection = 360 - targetRotation;
-				else
-					angleDirection = -targetRotation;
 
-				force = (transform.localPosition.x - targetInitialPosition);
+				float angleDirection;
+
+				if(transform.eulerAngles.x < 180)
+					angleDirection = transform.eulerAngles.x;
+				else
+					angleDirection = transform.eulerAngles.x - 360;
 
 				carController.SetAngleDirection (angleDirection);
-				carController.SetForce (force);
-
-				Debug.Log (angleDirection);
+				carController.SetForce (transform.localPosition.x - targetInitialPosition);
+			
 
 			} else {
 
 				targetInitialPosition = transform.localPosition.x;
-				targetInitialRotation = transform.localRotation.eulerAngles.x;
-
 				enable = true;
 
 			}
