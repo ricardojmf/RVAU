@@ -3,8 +3,10 @@ using System.Collections;
 
 public class CarController : MonoBehaviour {
 
+
     private float force;
     private float angleDirection;
+    private GameObject[] barrels;
 
 	private Rigidbody rb;
 
@@ -14,6 +16,13 @@ public class CarController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		force = 0;
         angleDirection = 0;
+
+        GameObject barrelSet = GameObject.FindGameObjectWithTag("Barrel");
+        barrels = barrelSet.GetComponentsInChildren<GameObject>();
+
+        string numBarrels = barrels.GetLength.ToString();
+
+        //Debug.Log(barrels.GetLength.ToStri);
 	}
 	
 	// Update is called once per frame
@@ -35,6 +44,7 @@ public class CarController : MonoBehaviour {
         {
             other.gameObject.SetActive(false);
         }
+            
     }
 
     public void SetAngleDirection(float val)
